@@ -1,24 +1,29 @@
 import { Pressable, StyleSheet } from 'react-native';
 import { Text, View } from '@/components/Themed';
+import type { RootState } from '../store';
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from '../../features/counter/counterSlice'
 
 export default function TabOneScreen() {
+  const count = useSelector((state: RootState) => state.value)
+  const dispatch = useDispatch()
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Count: </Text>
-      <View style={{flexDirection: "row", gap: 30}}>
-        <Pressable 
-          style={{backgroundColor: "black", padding: 20, borderRadius: 15}}
+      <Text style={styles.title}>Count: {count}</Text>
+
+      <View style={{ flexDirection: "row", gap: 30 }}>
+        <Pressable
+          style={styles.button}
+          onPress={() => dispatch(decrement())}
         >
-            <Text style={{fontSize: 25, fontWeight: "600", color: "white"}}>
-              +
-            </Text>
+          <Text style={styles.text}> - </Text>
         </Pressable>
-        <Pressable 
-          style={{backgroundColor: "black", padding: 20, borderRadius: 15}}
+
+        <Pressable
+          style={styles.button}
+          onPress={() => dispatch(increment())}
         >
-            <Text style={{fontSize: 25, fontWeight: "600", color: "white" }}>
-              -
-            </Text>
+          <Text style={styles.text}> + </Text>
         </Pressable>
       </View>
     </View>
@@ -36,9 +41,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  button: {
+    backgroundColor: "black",
+    padding: 20,
+    borderRadius: 15
   },
+  text: {
+    fontSize: 25,
+    fontWeight: "600",
+    color: "white"
+  }
 });
