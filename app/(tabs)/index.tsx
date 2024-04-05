@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from '../../features/counter/counterSlice'
 
 export default function TabOneScreen() {
-  const count = useSelector((state: RootState) => state.value)
+  const count = useSelector((state: RootState) => state.counter.value)
   const dispatch = useDispatch()
   return (
     <View style={styles.container}>
