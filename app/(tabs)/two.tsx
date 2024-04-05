@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
 export default function TabTwoScreen() {
-  const count = useSelector((state: RootState) => state.value)
+  const count = useSelector((state: RootState) => state.counter.value)
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
